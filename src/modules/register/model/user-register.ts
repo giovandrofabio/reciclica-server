@@ -1,4 +1,5 @@
-import { IsEmail, IsMobilePhone, IsNotEmpty, MinLength } from "class-validator";
+import { Type } from "class-transformer";
+import { IsEmail, IsMobilePhone, IsNotEmpty, IsNotEmptyObject, MinLength, ValidateNested } from "class-validator";
 import { Address } from "./address";
 
 export class UserRegister {
@@ -18,5 +19,8 @@ export class UserRegister {
     @IsMobilePhone()
     phone: string;
 
+    @IsNotEmptyObject()
+    @ValidateNested()
+    @Type(() => Address)
     address: Address;
 }

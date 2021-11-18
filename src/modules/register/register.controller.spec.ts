@@ -16,10 +16,6 @@ describe('RegisterController', () => {
     controller = module.get<RegisterController>(RegisterController);
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
-
   it('given user register validation, when name is empty, then return error 400', done => {
     const userRegister = createUserRegister();
     userRegister.name = "";
@@ -67,6 +63,71 @@ describe('RegisterController', () => {
     userRegister.phone = "invalid";
 
     validateFail(userRegister, done);
+  })
+
+  it('given user register validation, when address is empty, then return error 400', done => {
+    const userRegister = createUserRegister();
+    userRegister.address.address = "";
+
+    validateFail(userRegister, done);
+  })
+
+  it('given user register validation, when city is empty, then return error 400', done => {
+    const userRegister = createUserRegister();
+    userRegister.address.city = "";
+
+    validateFail(userRegister, done);
+  })
+
+  it('given user register validation, when complement is empty, then return error 400', done => {
+    const userRegister = createUserRegister();
+    userRegister.address.complement = "";
+
+    validateFail(userRegister, done);
+  })
+
+  it('given user register validation, when neighborhood is empty, then return error 400', done => {
+    const userRegister = createUserRegister();
+    userRegister.address.neighborhood = "";
+
+    validateFail(userRegister, done);
+  })
+
+  it('given user register validation, when number is empty, then return error 400', done => {
+    const userRegister = createUserRegister();
+    userRegister.address.number = "";
+
+    validateFail(userRegister, done);
+  })
+
+  it('given user register validation, when state is empty, then return error 400', done => {
+    const userRegister = createUserRegister();
+    userRegister.address.state = "";
+
+    validateFail(userRegister, done);
+  })
+
+  it('given user register validation, when zipCode is empty, then return error 400', done => {
+    const userRegister = createUserRegister();
+    userRegister.address.zipCode = "";
+
+    validateFail(userRegister, done);
+  })
+
+  it('given user register validation, when address is null, then return error 400', done => {
+    const userRegister = createUserRegister();
+    delete userRegister.address;
+
+    validateFail(userRegister, done);
+  })
+
+  it('given user register validation, when input is valid, then return success', done => {
+    const userRegister = createUserRegister();
+
+    validate(userRegister).then(response => {
+      expect(response).not.toBeNull();
+      done();
+    });
   })
 
   function createUserRegister() {
